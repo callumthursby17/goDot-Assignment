@@ -33,6 +33,7 @@
 #include "scene/gui/scroll_bar.h"
 #include "scene/gui/popup_menu.h"
 #include "scene/main/timer.h"
+#include "main/HintComments.h"
 
 
 class TextEdit : public Control  {
@@ -296,6 +297,8 @@ class TextEdit : public Control  {
 
 //	void mouse_motion(const Point& p_pos, const Point& p_rel, int p_button_mask);
 	Size2 get_minimum_size() const;
+
+	bool comment = false;
 
 	int get_row_height() const;
 
