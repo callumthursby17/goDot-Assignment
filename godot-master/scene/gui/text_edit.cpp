@@ -2887,7 +2887,12 @@ void TextEdit::_insert_text(int p_line, int p_char,const String& p_text,int *r_e
 	if (undo_enabled) {
 		_clear_redo();
 	}
-
+	HintComments hinter = new HintComments();
+	if (Test == false)
+	{
+		hinter.set_hint_comment();
+		Test = true;
+	}
 	int retline,retchar;
 	_base_insert_text(p_line,p_char,p_text,retline,retchar);
 	if (r_end_line)
@@ -2995,10 +3000,23 @@ void TextEdit::_remove_text(int p_from_line, int p_from_column,int p_to_line,int
 void TextEdit::_insert_text_at_cursor(const String& p_text) {
 
 	int new_column,new_line;
+	bool hint = false;
 	_insert_text(cursor.line,cursor.column,p_text,&new_line,&new_column);
 	cursor_set_line(new_line);
 	cursor_set_column(new_column);
-
+	if (comment == true)
+	{
+		if (p_text == "?")
+		{
+			//Read the current line.
+			//Get a hint and output it to the screen.
+		}
+	}
+	if (p_text == "#")
+	{
+		comment = true;
+	}
+	//if statement if a new line is added, set comment to false.
 	update();
 }
 
