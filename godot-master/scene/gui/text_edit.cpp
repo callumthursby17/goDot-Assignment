@@ -2887,12 +2887,17 @@ void TextEdit::_insert_text(int p_line, int p_char,const String& p_text,int *r_e
 	if (undo_enabled) {
 		_clear_redo();
 	}
-	HintComments hinter = new HintComments();
+	
+    
+    //Comment Hints Feature
+    HintComments hinter = new HintComments();
 	if (Test == false)
 	{
 		hinter.set_hint_comment();
 		Test = true;
 	}
+    
+    
 	int retline,retchar;
 	_base_insert_text(p_line,p_char,p_text,retline,retchar);
 	if (r_end_line)
@@ -2915,7 +2920,7 @@ void TextEdit::_insert_text(int p_line, int p_char,const String& p_text,int *r_e
 	op.chain_forward=false;
 	op.chain_backward=false;
 
-	//see if it shold just be set as current op
+	//see if it should just be set as current op
 	if (current_op.type!=op.type) {
 		op.prev_version = get_version();
 		_push_current_op();
